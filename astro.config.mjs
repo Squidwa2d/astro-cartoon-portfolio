@@ -1,12 +1,18 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
-
 import react from '@astrojs/react';
-import edgeoneAdapter from '@edgeone/astro';
+import sitemap from '@astrojs/sitemap';
 
-// https://astro.build/config
 export default defineConfig({
-  adapter: edgeoneAdapter(),
   output: 'static',
-  integrations: [react()]
+  site: 'https://junlin-blog.vercel.app',
+  integrations: [
+    react(),
+    sitemap(),
+  ],
+  markdown: {
+    shikiConfig: {
+      theme: 'github-light',
+      wrap: true,
+    },
+  },
 });

@@ -22,11 +22,11 @@ import { siteConfig } from "../config/site";
       </div>
     </div>
     <div class="hero-right-col">
-      <img src={siteConfig.hero.avatar} alt="avatar" class="hero-avatar hero-avatar-animate" />
+      <img src={siteConfig.hero.avatar} alt="avatar" class="hero-avatar hero-avatar-animate" loading="eager" decoding="async" />
       <div class="social-list">
         {siteConfig.hero.socialLinks.map((social) => (
           <a href={social.url} class="social-icon-btn social-icon-animate" aria-label={social.name}>
-            <img src={social.icon} alt={social.name.toLowerCase()} />
+            <img src={social.icon} alt={social.name.toLowerCase()} loading="lazy" decoding="async" />
           </a>
         ))}
       </div>

@@ -2,10 +2,15 @@
 import { getCollection } from "astro:content";
 import { Fragment } from "astro/jsx-runtime";
 import "../../styles/home.css";
+import "../../styles/dark-theme.css";
 import "../../styles/post-detail.css";
 import "../../styles/page-transitions.css";
 import Navigation from "../../components/Navigation.astro";
 import Footer from "../../components/Footer.astro";
+import SEO from "../../components/SEO.astro";
+import ThemeToggle from "../../components/ThemeToggle.astro";
+import BackToTop from "../../components/BackToTop.astro";
+import { siteConfig } from "../../config/site";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("posts")) as any[];
@@ -73,13 +78,25 @@ if (
 }
 ---
 
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <title>{post.data.title} - Astro Blog</title>
+    <title>{post.data.title} - {siteConfig.name}</title>
+    <SEO 
+      title={`${post.data.title} - ${siteConfig.name}`}
+      description={post.data.excerpt || `阅读 ${post.data.title}`}
+      article={true}
+      publishedTime={post.data.date}
+      tags={post.data.tags}
+    />
+    <script is:inline>
+      const theme = localStorage.getItem('theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
     <script>
       // Disable browser scroll restoration and ensure page starts at top
       if ("scrollRestoration" in history) {
@@ -91,6 +108,7 @@ if (
   </head>
   <body>
     <Navigation />
+    <ThemeToggle />
 
     <main class="post-detail-page">
       <div class="post-detail-container page-content">
@@ -112,6 +130,8 @@ if (
                 src="/image/20943608.jpeg"
                 alt={post.data.author || "Someone"}
                 class="post-detail-avatar"
+                loading="lazy"
+                decoding="async"
               />
               <span class="post-detail-author"
                 >{post.data.author || "Someone"}</span

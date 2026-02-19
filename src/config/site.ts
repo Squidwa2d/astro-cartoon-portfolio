@@ -75,15 +75,15 @@ export const siteConfig = {
   
   // Footer
   footer: {
-    copyright: "© 2025 Someone. All rights reserved.",
+    copyright: "© 2025 Junlin. All rights reserved.",
     links: [
       { text: "Privacy Policy", url: "#" },
       { text: "Terms of Service", url: "#" },
-      { text: "Sitemap", url: "#" },
+      { text: "Sitemap", url: "/sitemap-index.xml" },
     ],
     github: {
       text: "Star my project on Github",
-      url: "https://github.com/",
+      url: "https://github.com/Squidwa2d",
     },
   },
   
